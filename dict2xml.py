@@ -12,8 +12,8 @@ def _dict_sort_key(key_value):
     match = re.match('(\d+)__.*', key)
     return int(match.groups()[0]) if match else key
 
-_iter_dict_sorted = lambda dic: sorted(dic.iteritems(),
-    key=lambda key_value: _dict_sort_key(key_value)
+_iter_dict_sorted = lambda dic: sorted(
+    dic.iteritems(), key=(lambda key_value: _dict_sort_key(key_value))
 )
 
 def _remove_order_id(key):
@@ -26,17 +26,13 @@ def _check_errors(value, dataType):
             values = value.values()
             if len(values) != 1:
                 raise Dict2XMLException(
-                    'Must have exactly one root element in the dictionary.'
-                )
+                    'Must have exactly one root element in the dictionary.')
             elif isinstance(values[0], list):
                 raise Dict2XMLException(
                     'The root element of the dictionary cannot '
-                    'have a list as value.'
-                )
+                    'have a list as value.')
         else:
-            raise Dict2XMLException(
-                'Must pass a dictionary as an argument.'
-            )
+            raise Dict2XMLException('Must pass a dictionary as an argument.')
 
     elif dataType == 'key':
         if not isinstance(value, str):
@@ -53,20 +49,17 @@ def _check_errors(value, dataType):
         if not isinstance(value, dict):
             raise Dict2XMLException(
                 'The first element of tuple must be a dictionary '
-                'with a set of attributes for this element.'
-            )
+                'with a set of attributes for this element.')
 
 # Recursive core function
 def _buildXMLTree(rootXMLElement, key, content, document):
     _check_errors(key, 'key')
     keyElement = document.createElement(_remove_order_id(key))
 
-    (attrs, value) = (content
-                        if (isinstance(content, tuple)
-                                and len(content) == 2
-                        ) else
-                            ({}, content)
-    )
+    if isinstance(content, tuple) and len(content) == 2:
+        (attrs, value) = content
+    else:
+        (attrs, value) = ({}, content)
 
     _check_errors(attrs, 'attrs')
     for (attr, attrValue) in attrs.iteritems():
@@ -91,14 +84,8 @@ def _buildXMLTree(rootXMLElement, key, content, document):
             _buildXMLTree(rootXMLElement, key, subcontent, document)
 
     else:
-        raise Dict2XMLException('A key value must be:\n'
-            '  1. A string;\n'
-            '  2. A dictionary;\n'
-            '  3. A tuple containing the attributes\' '
-            'dictionary and the actual value;\n'
-            '  4. A list of values with one of those types '
-            'except the tuple.'
-        )
+        raise Dict2XMLException('Invalid key value.')
+
 def dict2XML(dic, indent=True, utf8=False):
     document = minidom.Document()
 
@@ -107,8 +94,8 @@ def dict2XML(dic, indent=True, utf8=False):
     (key, content) = dic.items()[0]
     _buildXMLTree(document, key, content, document)
 
-    return (document.toprettyxml(
-                indent='  ', encoding=('utf-8' if utf8 else None)
-            ) if indent else
-                    document.toxml(encoding=('utf-8' if utf8 else None))
-    )
+    encoding = 'utf-8' if utf8 else None
+    if indent:
+        return document.toprettyxml(indent='  ', encoding=encoding) 
+    else:
+        return document.toxml(encoding=encoding)
