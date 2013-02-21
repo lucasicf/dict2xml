@@ -1,0 +1,6 @@
+include README
+include LICENSE
+include *.py
+recursive-include tests *
+exclude *.py[co]
+recursive-exclude * *.py[co]
