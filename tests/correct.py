@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from unittest import TestCase
 from dict2xml import dict2XML
@@ -111,9 +111,10 @@ class CorrectTest(TestCase):
                 '<nothing/>'
                 '</root>'
             )
-            return ((result % self.XML_HEADER_UTF8).encode('utf-8')
-                        if utf8 else
-                        result % self.XML_HEADER)
+            if utf8:
+                return (result % self.XML_HEADER_UTF8).encode('utf-8')
+            else:
+                return result % self.XML_HEADER
 
         self.assertEqual(dict2XML(dic(False), indent=False),
                          xml(False))
