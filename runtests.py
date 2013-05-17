@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import unittest
-from tests import correct, wrong
+from tests import tests
 
 if __name__ == '__main__':
     loader = unittest.TestLoader()
     suite = unittest.TestSuite()
-    suite.addTests(loader.loadTestsFromModule(correct))
-    suite.addTests(loader.loadTestsFromModule(wrong))
+    suite.addTests(loader.loadTestsFromModule(tests))
     unittest.TextTestRunner(verbosity=2).run(suite)
