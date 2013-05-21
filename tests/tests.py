@@ -215,10 +215,11 @@ class SuccessTest(TestCase):
                 {
                     '1__foo': ({'c': 'd', 'e': 'f'}, {
                         '1__a': '1',
-                        '2__b': (
-                            {'a': 'b', 'c': 'd', 'e': 'f'},
-                            ['2', '3', '4']
-                        )
+                        '2__b': [
+                            ({'A': 'B', 'C': 'D'}, '2'),
+                            '3',
+                            ({'E': 'F'}, '4')
+                        ]
                     }),
                     '2__bar': [
                         {
@@ -240,9 +241,9 @@ class SuccessTest(TestCase):
             '  <list>',
             '    <foo c="d" e="f">',
             '      <a>1</a>',
-            '      <b a="b" c="d" e="f">2</b>',
-            '      <b a="b" c="d" e="f">3</b>',
-            '      <b a="b" c="d" e="f">4</b>',
+            '      <b A="B" C="D">2</b>',
+            '      <b>3</b>',
+            '      <b E="F">4</b>',
             '    </foo>',
             '    <bar>',
             '      <foo g="h" i="j">bar</foo>',

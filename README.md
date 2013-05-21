@@ -188,16 +188,16 @@ json = {'street': {
     '3__dwellers': {
         'dweller': [
             ({'id': '1'}, {
-                'name': 'Lucas',
-                'age': '23'
+                '1__name': 'Lucas',
+                '2__age': '23'
             }),
             ({'id': '2'}, {
-                'name': 'Renata',
-                'age': '25'
+                '1__name': 'Renata',
+                '2__age': '25'
             }),
             ({'id': '3'}, {
-                'name': 'Rafael',
-                'age': '55'
+                '1__name': 'Rafael',
+                '2__age': '55'
             })
         ]
     }

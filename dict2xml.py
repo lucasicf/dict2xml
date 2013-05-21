@@ -84,7 +84,7 @@ def _buildXMLTree(rootXMLElement, key, content, document):
     elif isinstance(value, list):
         # Recursively replicate this key element for each value in the list
         for subcontent in value:
-            _buildXMLTree(rootXMLElement, key, (attrs, subcontent), document)
+            _buildXMLTree(rootXMLElement, key, subcontent, document)
 
     else:
         raise Dict2XMLException('Invalid value.')
