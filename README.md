@@ -63,8 +63,8 @@ gives:
 ```python
 json = {'street': {
     u'1__name': u'4th street',
-    u'2__cíty': u'Río de Janêiro',
-    u'3__dwéllers': u'200'
+    u'2__city': u'São Paulo',
+    u'3__dwellers': u'200'
 }}
 print dict2XML(json, utf8=True)
 ```
@@ -73,8 +73,8 @@ gives:
 <?xml version="1.0" encoding="utf-8"?>
 <street>
   <name>4th Street</name>
-  <cíty>Río de Janêiro</cíty>
-  <dwéllers>200</dwéllers>
+  <city>São Paulo</city>
+  <dwellers>200</dwellers>
 </street>
 ```
 
