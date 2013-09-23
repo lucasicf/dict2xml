@@ -127,7 +127,7 @@ gives:
 
 ### Lists
 
-Useful to create multiple entries of an element. Lists are ordered, there's no needing to use any extra feature.
+Useful to create multiple entries of an element. Lists are ordered, there's no need to use any extra feature.
 
 ```python
 from dict2xml import dict2XML
